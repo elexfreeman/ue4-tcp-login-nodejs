@@ -1,0 +1,25 @@
+{
+  "name": "ue4-socket-io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "tcp": "./node_modules/.bin/node ./build/tcpSrvLogin.js",
+    "wtcp": "tsc-watch --outDir ./build --onSuccess \"npm run tcp\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@a-a-game-studio/aa-classes": "^1.0.12",
+    "@a-a-game-studio/aa-components": "^1.0.34",
+    "@types/moment": "^2.13.0",
+    "@types/node": "^14.0.6",
+    "knex": "^0.21.1",
+    "moment": "^2.26.0",
+    "mysql": "^2.18.1",
+    "tsc-watch": "^4.2.8",
+    "typescript": "^3.9.3",
+    "uniqid": "^5.2.0"
+  }
+}
