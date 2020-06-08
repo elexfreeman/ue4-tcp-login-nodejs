@@ -31,6 +31,8 @@ const server = net.createServer((socket: net.Socket) => {
 
         console.log(`[${fGetNowDataStr()}] Data from [${clientToken}]: `, data.toString());
 
+        // router
+
         const request: fBaseRequest = fRequest(data, clientToken);
 
         /* connect login controller */
