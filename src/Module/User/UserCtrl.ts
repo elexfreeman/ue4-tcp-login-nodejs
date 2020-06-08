@@ -12,7 +12,7 @@ import { fBaseRequest, fResponse } from '../Sys/ResponseSys';
 
 
 /**
- * Контролер пользователя
+ * User controller
  */
 export const faUserLogin = async (socket: net.Socket, request: fBaseRequest, errorSys: Components.ErrorSys, db: any) => {
 
@@ -25,17 +25,17 @@ export const faUserLogin = async (socket: net.Socket, request: fBaseRequest, err
 
       const data: UserLogin.RequestI = request.data;
 
-      /* валидируем входные данные */
+      /* validate input */
       cValidator = faUserLoginV(data, cValidator);
 
       if (!cValidator.fIsOk()) {
          throw 'error';
       }
 
-      /* получаем ответ от DB */
+      /* we get a response from DB */
       sToken = await userSQL.faGetTokenByLoginAndPass(data.login, data.pswd);
 
-      /* проверяем есть ли токен */
+      /* check if there is a token */
       cValidator.fSetErrorString('token')
          .fSetData(sToken)
          .fExist()
@@ -48,13 +48,13 @@ export const faUserLogin = async (socket: net.Socket, request: fBaseRequest, err
 
 
    } catch (e) {
-      /* все плохо с базой */
+      /* everything is bad with the base */
       cValidator.fSetErrorString('all bad')
          .fSetData(null)
          .fExist(e);
    }
 
-   /* формируем ответ */
+   /* we form the answer */
    const resp: UserLogin.ResponseI = {
       sRoute: UserLogin.sResponseRoute,
       ok: cValidator.fIsOk(),
@@ -65,10 +65,10 @@ export const faUserLogin = async (socket: net.Socket, request: fBaseRequest, err
       errors: cValidator.fGetErrorSys().getErrors()
    }
 
-   /* отправляем клиенту сообщение */
+   /* send a message to the client */
    fResponse(socket, resp);
 
-   /* если все хорошо записываем информацию о юзере в общую память  */
+   /* if everything is well written user information in the shared memory */
    if (cValidator.fIsOk()) {
       aSocketClient[request.sClientToken] = {
          token: sToken,

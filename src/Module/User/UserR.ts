@@ -2,7 +2,7 @@ import { BaseResponseI } from "../Sys/ResponseSys";
 import { UserI } from "./UserE";
 
 /**
- * Вход пользователя
+ * User Login
  */
 export namespace UserLogin {
 

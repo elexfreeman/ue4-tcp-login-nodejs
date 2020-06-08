@@ -2,7 +2,7 @@ import * as net from "net";
 
 
 /**
- * Базовый ответ клиенту
+ * Basic client response
  */
 export interface BaseResponseI {
     sRoute: string;
@@ -12,7 +12,7 @@ export interface BaseResponseI {
 }
 
 /**
- * базовый запрос от клиента
+ * basic request from client
  */
 export interface fBaseRequest {
     sClientToken: string;
@@ -23,7 +23,7 @@ export interface fBaseRequest {
 }
 
 /**
- * Функция парсинга запроса от сервера
+ * Parsing request function from server
  * @param data 
  */
 export const fRequest = (data: Buffer, sClientToken: string): fBaseRequest => {

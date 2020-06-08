@@ -1,12 +1,12 @@
 
 import * as AAClasses from '@a-a-game-studio/aa-classes/lib';
 
-// Системные сервисы
+// System services
 import { KnexSys } from './KnexSys';
 
 
 /**
- * SQL Запросы
+ * SQL
  */
 export default class BaseSQL {
 
@@ -19,7 +19,7 @@ export default class BaseSQL {
 
         this.knexSys = new KnexSys(errorSys);
         this.errorSys = errorSys;
-        this.db = db;
+        this.db = db; // knex connect
     }
 
 }

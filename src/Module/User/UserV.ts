@@ -3,7 +3,7 @@ import { UserLogin } from './UserR';
 
 
 /**
- * Вадидатор входных данных
+ * Input data validator
  * @param data 
  * @param cValidator 
  */

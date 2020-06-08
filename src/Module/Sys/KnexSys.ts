@@ -3,7 +3,7 @@ import * as AAClasses from '@a-a-game-studio/aa-classes/lib';
 
 
 /**
- * Обертка над написание запросов Knex
+ * Knex Query Writing Wrapper
  */
 export class KnexSys {
 
@@ -14,14 +14,14 @@ export class KnexSys {
     }
 
     /**
-     * Получить строку из SQL raw запроса
+     * Get string from SQL raw query
      * @param data
      */
     fOneRaw(data: any): any {
         let ok = this.errorSys.isOk();
         let one = null;
 
-        if (ok) { // Получаем стоку базы LIMIT 1
+        if (ok) { // We get the base row LIMIT 1
             try {
                 one = data[0][0];
             } catch (e) {
@@ -33,7 +33,7 @@ export class KnexSys {
     }
 
     /**
-     * Получить список из SQL raw запроса
+     * Get list from SQL raw query
      * @param data
      */
     async fListRaw(data: any): Promise<any> {
@@ -51,7 +51,7 @@ export class KnexSys {
     }
 
     /**
-     * Получить поле из SQL raw запроса
+     * Get field from SQL raw query
      * @param data
      * @param sField
      */
@@ -60,7 +60,7 @@ export class KnexSys {
         let field = null;
 
         if (this.errorSys.isOk()) {
-            try { // Получаем стоку базы LIMIT 1
+            try { 
                 field = data[0][0][sField];
             } catch (e) {
                 throw this.errorSys.throwDB(e, 'fFieldRaw');
@@ -73,7 +73,7 @@ export class KnexSys {
     // ==========================================
 
     /**
-     * Получить строку из SQL builder запроса
+     * Get row from SQL builder query
      * @param data
      */
     async fOne(data: any): Promise<any> {
@@ -81,7 +81,7 @@ export class KnexSys {
         let one = null;
 
         if (this.errorSys.isOk()) {
-            try { // Получаем стоку базы LIMIT 1
+            try { 
                 one = data[0];
             } catch (e) {
                 throw this.errorSys.throwDB(e, 'fOne');
@@ -92,14 +92,14 @@ export class KnexSys {
     }
 
     /**
-     * Получить строку из SQL builder запроса
+     * List
      * @param data
      */
     async fList(data: any): Promise<any> {
         let list = null;
 
         if (this.errorSys.isOk()) {
-            try { // Получаем стоку базы LIMIT 1
+            try { 
                 list = data;
             } catch (e) {
                 throw this.errorSys.throwDB(e, 'fList');
@@ -110,7 +110,7 @@ export class KnexSys {
     }
 
     /**
-     * Получить поле из SQL builder запроса
+     * Get field from SQL builder query
      * @param sField
      * @param data
      */
@@ -119,7 +119,7 @@ export class KnexSys {
         let field = null;
 
         if (this.errorSys.isOk()) {
-            try { // Получаем стоку базы LIMIT 1
+            try { 
                 field = data[0][sField];
             } catch (e) {
                 throw this.errorSys.throwDB(e, 'fField');

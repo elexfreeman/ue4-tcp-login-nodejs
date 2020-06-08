@@ -9,23 +9,23 @@ import { fBaseRequest, fRequest, fResponse } from "./Module/Sys/ResponseSys";
 import { UserLogin } from "./Module/User/UserR";
 
 /**
- * Текущая дата
+ * The current date
  */
 const fGetNowDataStr = (): string => moment().format('DD.MM.YYYY HH:mm:ss');
 
 /**
- * Оработчик сервера
+ * Server handler
  */
 const server = net.createServer((socket: net.Socket) => {
 
-    /* генерируем токен клиенту */
+    /* we generate a token to the client */
     const clientToken = fGenerateToken();
     aSocketClient[clientToken] = true;
 
     console.log(`[${fGetNowDataStr()}] Client connect ${clientToken}`);
 
 
-    /* получение данных от клиента */
+    /* receiving data from a client */
     socket.on('data', async (data: Buffer) => {
         const errorSys = new AAClasses.Components.ErrorSys();
 
@@ -33,11 +33,11 @@ const server = net.createServer((socket: net.Socket) => {
 
         const request: fBaseRequest = fRequest(data, clientToken);
 
-        /* подключаем котролер логина */
+        /* connect login controller */
         if (request.sRoute == UserLogin.sRequestRoute) {
             await faUserLogin(socket, request, errorSys, db);
         } else {
-            /* если маршрут не совпал, отправляет строчку */
+            /* if the route did not match, sends empty line */
             fResponse(socket, {
                 sRoute: '',
                 ok:true,
@@ -48,21 +48,26 @@ const server = net.createServer((socket: net.Socket) => {
 
     });
 
-    /* клиент отключися */
+    /* client disconnect */
     socket.on('end', () => {
         delete aSocketClient[clientToken];
         console.log(`[${fGetNowDataStr()}] Client ${clientToken} disconnect`);
     });
 
+    /* socket error */
+    socket.on('error', (err) => {
+        console.log(`[${fGetNowDataStr()}] Error:`, err);
+    });
+
 });
 
-/* ошибки сервера */
+/* server error */
 server.on('error', (err: any) => {
     console.log(`[${fGetNowDataStr()}] Error:`, err);
 });
 
 
-/* запускаем сервер */
+/* start the server */
 server.listen({
     port: 3007, family: 'IPv4', address: '127.0.0.1'
 }, () => {

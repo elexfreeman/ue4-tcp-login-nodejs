@@ -1,11 +1,11 @@
 import { conf } from "../Config/Config";
 
-export const db = require('knex')(conf.mysql);
+export const db = require('knex')(conf.mysql); // knex connect
 
-
+// clients
 export interface SocketClientI {
     [key: string]: any;
 }
 
-/* клиенты */
+/* clients */
 export const aSocketClient: SocketClientI = {};

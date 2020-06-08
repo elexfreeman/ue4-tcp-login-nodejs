@@ -6,8 +6,7 @@ export class UserSQL extends BaseSQL {
 
 
     /**
-     * Для авторизации
-     * Выдает токен по логину и паролю
+     * Gives a token by login and password
      * @param login 
      * @param pass 
      * @returns token
@@ -28,18 +27,20 @@ export class UserSQL extends BaseSQL {
         try {
             let result = await this.db.raw(sql, {
                 'login': sLogin,
-                //'pswd': HashFunc.fPassToHash(sPass),  // для примера
+                //'pswd': HashFunc.fPassToHash(sPass),  // example
                 'pswd': sPass,
             });
             res = result[0][0]['token'];
         } catch (e) {
-            this.errorSys.errorEx(e, 'get_token_by_login_and_pass', 'Не удалось получить токен по логину и паролю');
+            this.errorSys.errorEx(e, 'get_token_by_login_and_pass', 'Failed to get token by login and password');
         }
 
         return res;
     }
+
+
     /**
-     * Выдает ползователя по токену
+     * Gives a user
      * @param login 
      * @param pass 
      * @returns token
@@ -61,7 +62,7 @@ export class UserSQL extends BaseSQL {
             });
             res = result[0][0];
         } catch (e) {
-            this.errorSys.errorEx(e, 'get_user_info_by_token', 'Не удалось получить пользователя по токену');
+            this.errorSys.errorEx(e, 'get_user_info_by_token', 'Failed to get user by token');
         }
 
         return res;
