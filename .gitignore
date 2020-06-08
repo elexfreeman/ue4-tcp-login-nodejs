@@ -105,4 +105,4 @@ dist
 
 build
 
-#src/Module/Config/Config.ts
+src/Module/Config/Config.ts
