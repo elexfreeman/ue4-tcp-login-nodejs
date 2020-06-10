@@ -19,7 +19,6 @@ export const conf: ConfI = {
         "acquireConnectionTimeout": 60000
     },
     common: {
-        env: 'dev',
         port: 3007,
     },
 

@@ -1,5 +1,5 @@
 export interface ConfI {
-    env: string;
+    env: string; // prod - dev
     mysql: {
         client: string;
         connection: {
@@ -22,7 +22,6 @@ export interface ConfI {
         url: string;
     };  
     common: {
-        env: string;
         port: number;
     };
 }

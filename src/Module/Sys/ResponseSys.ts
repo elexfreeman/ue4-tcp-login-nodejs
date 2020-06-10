@@ -23,8 +23,9 @@ export interface fBaseRequest {
 }
 
 /**
- * Parsing request function from server
+ * Parsing request from client   server <== client
  * @param data 
+ * @param sClientToken 
  */
 export const fRequest = (data: Buffer, sClientToken: string): fBaseRequest => {
     let out: fBaseRequest = {
@@ -58,6 +59,11 @@ export const fRequest = (data: Buffer, sClientToken: string): fBaseRequest => {
     return out;
 }
 
+/**
+ * response from server ==> client
+ * @param socket 
+ * @param response 
+ */
 export const fResponse = (socket: net.Socket, response: BaseResponseI) => {
     socket.write(JSON.stringify(response))
 }
